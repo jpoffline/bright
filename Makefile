@@ -4,3 +4,6 @@ setup:
 
 activate:
 	souce .venv/bin/activate
+
+test:
+	pytest bright/
