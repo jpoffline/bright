@@ -44,11 +44,14 @@ def match_jobs_to_member(member: Member, jobs: Jobs) -> List[Job]:
 
     possible: List[Job] = []
     for job in jobs:
+        add_job = False
         for token in member_bio_tokens:
             if len(token) < 4:
                 continue
             if token == job.lower_location and matcher_params.negate_location:
                 continue
             if is_compatible(token, job):
-                possible.append(job)
+                add_job = True
+        if add_job:
+            possible.append(job)
     return possible

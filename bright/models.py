@@ -20,6 +20,10 @@ class Member:
 class Members:
     members: List[Member] = field(default_factory=list)
 
+    def __iter__(self):
+        for m in self.members:
+            yield m
+
     @classmethod
     def from_json(cls, js):
         return [Member.from_json(j) for j in js]
