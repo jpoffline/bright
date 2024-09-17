@@ -22,7 +22,7 @@ class MembersDataFromHTTP(MembersDataLoader):
 
 
 class MembersDataFromFile(MembersDataLoader):
-    file_name = "members.json"
+    file_name = "local-data/members.json"
 
     def load(self):
         with open(self.file_name) as f:

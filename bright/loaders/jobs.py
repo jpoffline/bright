@@ -22,7 +22,7 @@ class JobsDataFromHTTP(JobsDataLoader):
 
 
 class JobsDataFromFile(JobsDataLoader):
-    file_name = "jobs.json"
+    file_name = "local-data/jobs.json"
 
     def load(self):
         with open(self.file_name) as f:
