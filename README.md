@@ -17,22 +17,40 @@ This will start a new python `venv` and install all dependencies.
 ```bash
 make test
 ```
+- To clean up and delete the venv, execute
+```bash
+make clean
+```
+
 
 - To run the code, execute
 ```bash
 make run
 ```
 The code will execute and print out a list of possible job suggestions per member, ranked by a suggestion-score. The job with the top score is marked with an asterisk.
-
-- To clean up,
-```bash
-make clean
+An example output includes the  following
 ```
-This will delete the venv.
-## Design
-This code submission has been optimised to showcase good coding practices architecture & design, rather than a rock-solid suggestion algorithm, whilst faithfully remaining inside the ~3hour development window requirement.
+Member: Marta
+Bio: I'm looking for an internship in London
+Suggestions: 
+*  (2) Legal Internship in London
+  (2) Sales Internship in London
+  (1) Software Developer in London
+  (1) Marketing Internship in York
+  (1) Data Scientist in London
+  (1) UX Designer in London
+```
+```
+Member: Grace
+Bio: I'm looking for a job in marketing outside of London
+Suggestions: 
+*  (1) Marketing Internship in York
+```
 
-I have chosen a data-structure/algorithm split: python `dataclass`s are used to hold data, and functions have been written to modify or calculate on that data. This approach significantly helps testing and dependency-injection.
+## Design
+This code submission has been optimised to showcase good coding practices, architecture, & design, rather than a rock-solid suggestion algorithm, whilst faithfully remaining inside the ~3hour development window requirement.
+
+I have chosen a data-structure/algorithm split: python `dataclass`s are used to hold data, and functions have been written to modify or calculate on that data. This approach optmises for testing and dependency-injection, which is vital for high quality maintainable code.
 
 I have chosen to use type-hints in functions and class-definitions. This helps readability and maintainability (since the python IDE uses these to help the coder).
 
@@ -57,9 +75,15 @@ def new_data_jobs_loader(source: str):
  I have implemented 2 data loaders for each data: one from `http` and one from a local `json`-file.
 
  ### Jobs matcher
- I have implemented a "first-pass" of a jobs -> member matcher in `bright.matcher.matcher`. I noticed a few challenges in the data. 
+ I have implemented a "first-pass" of a jobs -> member matcher in `bright.matcher.matcher`. 
  
- For example, the member with bio
+ I noticed a few challenges in the data.  By changing all bios and job-roles to lower-case strings we can get around the issue of capitalisation; for example, the member with bio
+```
+I'm looking for an internship in London
+```
+can be easily matched up with the job role `Sales Internship`.
+ 
+As a trickier example, the member with bio
  ```
  I'm looking for a job in marketing outside of London
  ```
@@ -71,11 +95,7 @@ I'm a software developer currently in Edinburgh but looking to relocate to Londo
 ```
 Here two cities are mentioned (Edinburgh and London), but the member expresses a desire to ignore Edinburgh and focus on London. This has been detected in my code by analysing the bio and looking for key-phrases like `relocate to`.
 
-By changing all bios and job-roles to lower-case strings we can get around the issue of capitalisation; for example, the member with bio
-```
-I'm looking for an internship in London
-```
-can be easily matched up with the job role `Sales Internship`.
+
 
 ### Job suggestion scores
 Each `JobSuggestion` for a `Member` has the following properties: the `Job` and a `score` for that job. This score is supposed to be a stand-in for how "good" a match the suggestion is (I have implemented a very simple scoring system - how many words in the `Member`'s bio and in the `Job` `location` and `title` overlap). This score is only calculated on jobs that pass simple tests already
@@ -86,7 +106,7 @@ I have written basic unit tests - mainly around the bio-analysis piece.
 ## Further work
 
 The code and algorithm in this submission has a good number of areas for improvement:
-- test coverage: adding more unit tests, creating service and integration tests, and if needed load-testing.
-- matching algorithm development: is is clear that the algorithm I have constructed isnt quite able to cope with the fuzziness of actual written language. Propose to include some fuzzy-matching or NLP principles in order to capture the semantic meaning in written sentances.
-- configuration: at the moment, the "data source" is hard-coded inside the `config.py` file. This is ok in development, but should be abstracted out to e.g., an environment variable.
-- logging: error handling and visibility is incredibly important in a prod-ready application. A mechanism for logging choices would be pertininent to include (as well as somewhere to capture errors). Examples of centralised targets for such logs include grafana or sentry.
+- **test coverage**: adding more unit tests, creating service and integration tests, and if needed load-testing.
+- **matching algorithm development**: is is clear that the algorithm I have constructed isnt quite able to cope with the fuzziness of actual written language. Propose to include some fuzzy-matching or NLP principles in order to capture the semantic meaning in written sentances.
+- **configuration**: at the moment, the "data source" is hard-coded inside the `config.py` file. This is ok in development, but should be abstracted out to e.g., an environment variable.
+- **logging**: error handling and visibility is incredibly important in a prod-ready application. A mechanism for logging choices would be pertininent to include (as well as somewhere to capture errors). Examples of centralised targets for such logs include grafana or sentry.
