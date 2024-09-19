@@ -74,6 +74,17 @@ def new_data_jobs_loader(source: str):
 
  I have implemented 2 data loaders for each data: one from `http` and one from a local `json`-file.
 
+In addition to `ABC` I have also showcased defining a `Protocol` in the `bright.matcher.report` file:
+```python
+class Writer(Protocol):
+    def write(self, message): ...
+```
+Here we declare that a class can be used "as a" writer if it implements the `write` method. A function expecting a `Writer` would have its signature written as
+```python
+def report_matches_for_member(writer: Writer, suggestions: JobSuggestionsForMember)
+```
+An example of a class that can be used as a `Writer` is `sys.stdout`.
+
  ### Jobs matcher
  I have implemented a "first-pass" of a jobs -> member matcher in `bright.matcher.matcher`. 
  

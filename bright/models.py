@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List
+from typing import List, Dict
 
 
 @dataclass
@@ -12,7 +12,7 @@ class Member:
         return self.bio.lower()
 
     @classmethod
-    def from_json(cls, j):
+    def from_json(cls, j: Dict[str, str]):
         return cls(name=j["name"], bio=j["bio"])
 
 
@@ -25,7 +25,7 @@ class Members:
             yield m
 
     @classmethod
-    def from_json(cls, js):
+    def from_json(cls, js: List[Dict[str, str]]):
         return [Member.from_json(j) for j in js]
 
 
@@ -43,7 +43,7 @@ class Job:
         return self.location.lower()
 
     @classmethod
-    def from_json(cls, j):
+    def from_json(cls, j: Dict[str, str]):
         return cls(location=j["location"], title=j["title"])
 
 
@@ -56,5 +56,5 @@ class Jobs:
             yield job
 
     @classmethod
-    def from_json(cls, js):
+    def from_json(cls, js: List[: Dict[str, str]]):
         return [Job.from_json(j) for j in js]

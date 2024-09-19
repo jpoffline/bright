@@ -7,6 +7,8 @@ from config import DATA_SOURCE
 
 def run():
 
+    print("* datasource: " + DATA_SOURCE)
+
     jobs = load_jobs_data(DATA_SOURCE)
     members = load_members_data(DATA_SOURCE)
 

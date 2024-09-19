@@ -23,6 +23,7 @@ def match_jobs_to_member(member: Member, jobs: Jobs) -> JobSuggestionsForMember:
     for job in jobs:
         add_job = False
         for token in member_bio_tokens:
+            # ignore matching on short tokens
             if len(token) < 4:
                 continue
             if is_compatible(token, job, bio_analysis):
