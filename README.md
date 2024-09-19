@@ -122,3 +122,4 @@ The code and algorithm in this submission has a good number of areas for improve
 - **configuration**: at the moment, the "data source" is hard-coded inside the `config.py` file. This is ok in development, but should be abstracted out to e.g., an environment variable.
 - **logging**: error handling and visibility is incredibly important in a prod-ready application. A mechanism for logging choices would be pertininent to include (as well as somewhere to capture errors). Examples of centralised targets for such logs include grafana or sentry.
 - **code architecture**: this could be improved to reduce coupling of dependencies. 
+- **CI/CD**: ensure that 1) the unit tests are executed pre-commit, 2) the test suite is executed in the remote repo, 3) any deployment is configured and executed on satisfaction of the pipeline requirements.
