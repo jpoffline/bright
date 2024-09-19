@@ -121,3 +121,4 @@ The code and algorithm in this submission has a good number of areas for improve
 - **matching algorithm development**: is is clear that the algorithm I have constructed isnt quite able to cope with the fuzziness of actual written language. Propose to include some fuzzy-matching or NLP principles in order to capture the semantic meaning in written sentances.
 - **configuration**: at the moment, the "data source" is hard-coded inside the `config.py` file. This is ok in development, but should be abstracted out to e.g., an environment variable.
 - **logging**: error handling and visibility is incredibly important in a prod-ready application. A mechanism for logging choices would be pertininent to include (as well as somewhere to capture errors). Examples of centralised targets for such logs include grafana or sentry.
+- **code architecture**: this could be improved to reduce coupling of dependencies. 
