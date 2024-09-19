@@ -19,7 +19,7 @@ def match_jobs_to_member(member: Member, jobs: Jobs) -> JobSuggestionsForMember:
 
     bio_analysis = analyse_bio(member)
 
-    possible = JobSuggestionsForMember(member)
+    suggestions_for_member = JobSuggestionsForMember(member)
     for job in jobs:
         add_job = False
         for token in member_bio_tokens:
@@ -29,6 +29,6 @@ def match_jobs_to_member(member: Member, jobs: Jobs) -> JobSuggestionsForMember:
             if is_compatible(token, job, bio_analysis):
                 add_job = True
         if add_job:
-            possible.add_suggestion(job)
-    possible.finish()
-    return possible
+            suggestions_for_member.add(job)
+    suggestions_for_member.finish()
+    return suggestions_for_member

@@ -48,7 +48,7 @@ Suggestions:
 ```
 
 ## Design
-This code submission has been optimised to showcase good coding practices, architecture, & design, rather than a rock-solid suggestion algorithm, whilst faithfully remaining inside the ~3hour development window requirement.
+This code submission has been optimised to showcase good coding practices, architecture, & design, rather than a rock-solid suggestion algorithm, whilst faithfully remaining inside the ~3hour development window constraint.
 
 I have chosen a data-structure/algorithm split: python `dataclass`s are used to hold data, and functions have been written to modify or calculate on that data. This approach optmises for testing and dependency-injection, which is vital for high quality maintainable code.
 
