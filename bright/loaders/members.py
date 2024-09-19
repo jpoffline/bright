@@ -30,7 +30,7 @@ class MembersDataFromFile(MembersDataLoader):
         return Members.from_json(d)
 
 
-def new_data_members_loader(source):
+def new_data_members_loader(source) -> MembersDataLoader:
     if source == FILE_SOURCE:
         return MembersDataFromFile()
     elif source == HTTP_SOURCE:

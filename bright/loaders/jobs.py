@@ -30,7 +30,7 @@ class JobsDataFromFile(JobsDataLoader):
         return Jobs.from_json(d)
 
 
-def new_data_jobs_loader(source: str):
+def new_data_jobs_loader(source: str) -> JobsDataLoader:
     if source == FILE_SOURCE:
         return JobsDataFromFile()
     elif source == HTTP_SOURCE:
