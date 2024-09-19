@@ -3,7 +3,7 @@ import requests
 from http import HTTPStatus
 from ..models import Members
 from abc import ABC, abstractmethod
-from config import DATA_SOURCE, URL_MEMBERS
+from config import URL_MEMBERS
 from ..vars import FILE_SOURCE, HTTP_SOURCE
 
 
@@ -30,9 +30,9 @@ class MembersDataFromFile(MembersDataLoader):
         return Members.from_json(d)
 
 
-def new_data_members_loader():
-    if DATA_SOURCE == FILE_SOURCE:
+def new_data_members_loader(source):
+    if source == FILE_SOURCE:
         return MembersDataFromFile()
-    elif DATA_SOURCE == HTTP_SOURCE:
+    elif source == HTTP_SOURCE:
         return MembersDataFromHTTP()
-    raise Exception("unkown source: " + DATA_SOURCE)
+    raise Exception("unkown source: " + source)

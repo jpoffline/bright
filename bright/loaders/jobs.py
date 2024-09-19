@@ -30,9 +30,9 @@ class JobsDataFromFile(JobsDataLoader):
         return Jobs.from_json(d)
 
 
-def new_data_jobs_loader():
-    if DATA_SOURCE == FILE_SOURCE:
+def new_data_jobs_loader(source: str):
+    if source == FILE_SOURCE:
         return JobsDataFromFile()
-    elif DATA_SOURCE == HTTP_SOURCE:
+    elif source == HTTP_SOURCE:
         return JobsDataFromHTTP()
-    raise Exception("unkown source: " + DATA_SOURCE)
+    raise Exception("unkown source: " + source)

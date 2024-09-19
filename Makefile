@@ -1,9 +1,12 @@
 setup:
 	python3 -m venv .venv
-	pip install -r requirements.txt
-
-activate:
-	souce .venv/bin/activate
+	.venv/bin/pip install -r requirements.txt
 
 test:
-	pytest bright/
+	.venv/bin/python -m pytest bright/
+
+run:
+	.venv/bin/python main.py
+
+clean: 
+	rm -rf .venv
